@@ -41,16 +41,10 @@ variable "image_compartment_id" {
   description = "Custom image compartment OCID. Leave null to use OCI platform images from the tenancy."
 }
 
-variable "image_operating_system" {
+variable "image_display_name" {
   type        = string
-  default     = "Canonical Ubuntu"
-  description = "OCI operating-system filter for the platform image."
-}
-
-variable "image_operating_system_version" {
-  type        = string
-  default     = "24.04"
-  description = "OCI operating-system-version filter for the platform image."
+  default     = "Canonical-Ubuntu-24.04-Minimal-aarch64-2026.09.18-0"
+  description = "Exact OCI platform-image display name for Canonical Ubuntu 24.04 Minimal aarch64."
 }
 
 variable "instance_name" {

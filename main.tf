@@ -30,23 +30,12 @@ locals {
   ]
 }
 
-# Platform images belong to the tenancy. Select the newest Canonical Ubuntu
-# 24.04 Minimal aarch64 image instead of pinning a release name that OCI will
-# eventually remove from the platform-image list.
+# Platform images belong to the tenancy. OCI's unfiltered platform-image list
+# does not reliably include the Minimal ARM variant, so query that variant by
+# its exact display name.
 data "oci_core_images" "ubuntu" {
-  compartment_id           = coalesce(var.image_compartment_id, var.tenancy_ocid)
-  operating_system         = var.image_operating_system
-  operating_system_version = var.image_operating_system_version
-  shape                    = var.shape
-  sort_by                  = "TIMECREATED"
-  sort_order               = "DESC"
-}
-
-locals {
-  ubuntu_minimal_aarch64_images = [
-    for image in data.oci_core_images.ubuntu.images : image
-    if startswith(image.display_name, "Canonical-Ubuntu-24.04-Minimal-aarch64-")
-  ]
+  compartment_id = coalesce(var.image_compartment_id, var.tenancy_ocid)
+  display_name   = var.image_display_name
 }
 
 resource "oci_core_instance" "arm_vm" {
@@ -73,7 +62,7 @@ resource "oci_core_instance" "arm_vm" {
 
   source_details {
     source_type = "image"
-    source_id   = local.ubuntu_minimal_aarch64_images[0].id
+    source_id   = data.oci_core_images.ubuntu.images[0].id
   }
 
   metadata = {
