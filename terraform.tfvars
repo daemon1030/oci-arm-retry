@@ -4,7 +4,7 @@ compartment_id = "ocid1.tenancy.oc1..aaaaaaaag3pdj5ydj4y4yexzt7pe2x3yygwfmzj42uo
 
 availability_domain = "noER:AP-TOKYO-1-AD-1"
 
-subnet_id = "ocid1.vcn.oc1.ap-tokyo-1.amaaaaaa2m3ulkaadqihr6bhaq55srg4hhtnbtc7ku3fdcpqabdzz67sx5oa"
+subnet_id = "ocid1.subnet.oc1.ap-tokyo-1.aaaaaaaabwlyva2ub2a2lwzdblfytubd5ycr7ascrnfepwuzqusm7rjvm3ka"
 
 instance_name = "daemon-server"
 
